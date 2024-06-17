@@ -1,4 +1,5 @@
 const nodemailer = requre('nodemailer');
+require("dotenv").config();
 
 const mailSender = async (email, title, body) => {
     try {
@@ -28,5 +29,6 @@ const mailSender = async (email, title, body) => {
         console.log(error.message)
     }
 }
+
 
 module.exports = mailSender;

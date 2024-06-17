@@ -33,7 +33,7 @@ const courseSchema = new mongoose.Schema({
         type: Number,
     },
     thumbnail: {
-        type: String
+        type: String // secure_url for image that will be uploaded on cloudionary
     },
     tag: {
         type: mongoose.Schema.Types.ObjectId,

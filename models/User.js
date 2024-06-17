@@ -23,11 +23,11 @@ const userSchema = new mongoose.Schema({
     },
     accountType: {
         type: String,
-        enum: ["Admin", "student", "Instructor"],
+        enum: ["Admin", "Student", "Instructor"],
         required: true,
     },
 
-    additionalDetails: {
+    additionalDetails: { 
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: "Profile" // model name
@@ -42,6 +42,12 @@ const userSchema = new mongoose.Schema({
     image: {
         type: String,
         required: true,
+    },
+    token: {
+        type: String
+    },
+    resetPasswordExpires: {
+        type: Date
     },
     courseProgress: [
         {
