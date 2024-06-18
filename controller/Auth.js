@@ -154,6 +154,22 @@ exports.signUp = async (req, res) => {
             image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName},${lastName}`,
         })
 
+
+        // TODO:Add profileDetails object id to created user
+        /*
+        user.additionalDetails = profileDetails._id
+        user.save();
+        */
+
+        /* 
+        const updatedUser = await User.findByIdAndUpdate(
+            { _id: user._id },
+            { additionalDetails: profileDetails._id, },
+            { new: true }
+        )
+        */
+
+
         return res.status(200).json({
             success: true,
             message: "user is registered successfully",
@@ -192,7 +208,7 @@ exports.login = async (req, res) => {
             })
         }
 
-        
+
         if (await bcryptjs.compare(password, user.password)) {
 
             const payload = {
@@ -201,21 +217,21 @@ exports.login = async (req, res) => {
                 accountType: user.accountType
             }
 
-            let token = jwt.sign(payload, process.env.JWT_SECRET,{expiresIn:"2h"});
+            let token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "2h" });
 
             user = user.toObject();
-            user.token  = token;
+            user.token = token;
             user.password = undefined;
 
             const options = {
-                expires: new Date(Date.now() + 3* 24 * 60* 60 * 1000),
-                httpOnly:true
+                expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+                httpOnly: true
             }
-            res.cookie("token",token,options).status(200).json({
-                success:true,
+            res.cookie("token", token, options).status(200).json({
+                success: true,
                 token,
                 user,
-                message:'user logged in successfully'
+                message: 'user logged in successfully'
             })
         }
         else {
@@ -235,6 +251,6 @@ exports.login = async (req, res) => {
 }
 
 
-exports.change = async(req,res)=>{
+exports.change = async (req, res) => {
 
 }

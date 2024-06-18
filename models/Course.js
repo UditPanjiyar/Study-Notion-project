@@ -35,9 +35,13 @@ const courseSchema = new mongoose.Schema({
     thumbnail: {
         type: String // secure_url for image that will be uploaded on cloudionary
     },
-    tag: {
+    category: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "tag"
+        ref: "Category"
+    },
+    tag: {
+        type: String,
+        trim: true,
     },
     studentsEnrolled: [
         {
@@ -51,4 +55,4 @@ const courseSchema = new mongoose.Schema({
 })
 
 
-module.exports= mongoose.model("Course", courseSchema)
+module.exports = mongoose.model("Course", courseSchema)
