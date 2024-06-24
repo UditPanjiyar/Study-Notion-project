@@ -1,9 +1,10 @@
 const User = require("../models/User");
 const mailSender = require("../utils/mailSender")
 const bcryptjs = require("bcryptjs");
+const crypto = require("crypto")
 
 
-// reset password token
+// reset password token -> it generate token and send URL with Token to the user;
 
 exports.resetPasswordToken = async (req, res) => {
 
@@ -25,9 +26,11 @@ exports.resetPasswordToken = async (req, res) => {
 
         // generate token
         const token = crypto.randomUUID();
+                    //  (OR)
+        // const token = crypto.randomBytes(20).toString("hex");  
 
         // update user by adding token and expiration time
-        const updatedDetails = User.findOneAndUpdate(
+        const updatedDetails = await User.findOneAndUpdate(
             { email: email },
             {
                 token: token,
@@ -42,9 +45,12 @@ exports.resetPasswordToken = async (req, res) => {
         // send mail contaning url
         await mailSender(email, "Password Reset Link", `Password Reset Link ${url}`)
 
+        const updatedUser = await User.findOne({email:email})
+
         return res.json({
             success: true,
-            message: "email sent successfully pls check email and change password "
+            message: "email sent successfully pls check email and change password ",
+            data:updatedUser
         })
 
 
@@ -53,7 +59,8 @@ exports.resetPasswordToken = async (req, res) => {
         console.log(error);
         return res.status(500).json({
             success: false,
-            message: "Somthing went wrong while sending reset password"
+            message: "Somthing went wrong while sending reset password",
+            error:error.message
         })
     }
 }
@@ -79,7 +86,7 @@ exports.resetPassword = async (req, res) => {
         if (!userDetails) {
             return res.json({
                 success: false,
-                message: 'Token is invalid'
+                message: 'Token is invalid',
             })
         }
 
@@ -111,7 +118,8 @@ exports.resetPassword = async (req, res) => {
         console.log(error);
         return res.status(500).json({
             success: false,
-            message: "Somthing went wrong while sending reset password"
+            message: "Somthing went wrong while sending reset password",
+            error:error.message
         })
     }
 

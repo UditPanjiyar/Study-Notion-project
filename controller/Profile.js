@@ -1,5 +1,9 @@
+const { default: mongoose } = require("mongoose");
 const Profile = require("../models/Profile")
-const User = require("../models/User")
+const User = require("../models/User");
+const CourseProgress = require("../models/CourseProgress");
+const { uploadImageToCloudinary } = require("../utils/imageUploader");
+const Course = require("../models/Course");
 
 exports.updateProfile = async (req, res) => {
     try {
@@ -15,34 +19,40 @@ exports.updateProfile = async (req, res) => {
             })
         }
         // find profile 
-        const userDetails = await User.findById({ id });
+        const userDetails = await User.findById(id);
         const profileId = userDetails.additionalDetails;
 
-        const profileDetails = Profile.findById({ profileId })
         // update profile
-        profileDetails.gender = gender
+        const profileDetails = await Profile.findById(profileId)
         profileDetails.dateOfBirth = dateOfBirth;
         profileDetails.about = about;
         profileDetails.contactNumber = contactNumber
-        profileDetails.save();
+        profileDetails.gender = gender
+        await profileDetails.save();
 
-        // can we also do like this
-        /*
-        const profileDetail = Profile.findByIdAndUpdate(
-            {profileId},
-            {gender:gender},
-            {dateOfBirth:dateOfBirth},
-            {about:about},
-            {contactNumber:contactNumber},
-            {new:true}
-        ) 
-        */
+        //  we can also do like this
+        // const profileDetails = await Profile.findByIdAndUpdate(
+        //     {_id: new mongoose.Types.ObjectId(profileId)},
+        //     {
+        //         gender:gender,
+        //         dateOfBirth:dateOfBirth,
+        //         about:about,
+        //         about:about,
+        //         contactNumber:contactNumber,
 
+        //     },
+        //     {new:true}
+        // ) 
+
+        const updatedUserDetails = await User.findById(id)
+            .populate("additionalDetails")
+            .exec()
         //return res
         return res.status(200).json({
             success: true,
             message: "profile updated successfully",
-            profileDetails
+            profileDetails,
+            updatedUserDetails
         })
 
 
@@ -62,7 +72,7 @@ exports.deleteAccount = async (req, res) => {
         // get id 
         const id = req.user.id
         // validation
-        const userDetails = User.findById({ id })
+        const userDetails = await User.findById({ _id: id }).populate("courses").exec()
         if (!userDetails) {
             return res.status(404).json({
                 success: false,
@@ -70,12 +80,27 @@ exports.deleteAccount = async (req, res) => {
             })
         }
         // delete profile
+        // Delete Assosiated Profile with the User 
+        // NOTE we used here "new mongoose.Types.ObjectId()" to convert string into object;
         const profileId = userDetails.additionalDetails;
-        const deletedProfile = await Profile.findByIdAndDelete({ profileId })
+        const deletedProfile = await Profile.findByIdAndDelete(profileId)
         // TODO: before deleting the user also delete it from studentEnrolled from Course schema 
-        
-        // delete User 
-        const deletedUser = await User.findByIdAndDelete({ id })
+
+        for(const courseId of userDetails.courses) {
+            await Course.findByIdAndUpdate(courseId,
+                {
+                    $pull: {
+                        studentsEnrolled: id
+                    }
+                },
+                { new: true })
+        }
+        // also delete all course progress related with user 
+        await CourseProgress.deleteMany({ userId: id })
+
+        // Now delete User 
+        const deletedUser = await User.findByIdAndDelete( id )
+
         return res.status(200).json({
             success: true,
             message: "profile deleted successfully",
@@ -88,27 +113,134 @@ exports.deleteAccount = async (req, res) => {
         return res.status(500).json({
             success: false,
             message: "User cannot be deleted please try again",
+            error: error.message
         })
     }
 }
 
-exports.getAllUserDetail = async(req,res)=>{
-    try{
+exports.getUserDetail = async (req, res) => {
+    try {
         const id = req.user.id
-        const userDetails = await User.findById({id}).populate("additionalDetails").exec();
-       
+        const userDetails = await User.findById(id).populate("additionalDetails").exec();
+
         return res.status(200).json({
             success: true,
             message: "User data fetched successfully",
+            data: userDetails
         })
     }
-    catch(error)
-    {
-        console.log(error)
-        console.log(error.message)
+    catch (error) {
+        console.log("ERROR:-", error)
+        console.log("ERROR MESSAGE:-", error.message)
         return res.status(500).json({
             success: false,
             message: "unable to fectch user data , please try again",
+            error: error.message
+        })
+    }
+}
+
+exports.updateDisplayPicture = async (req, res) => {
+    try {
+        const id = req.user.id
+        const displayPicture = req.files.displayPicture
+        const image = await uploadImageToCloudinary(displayPicture, process.env.FOLDER_NAME, 1000, 1000)
+        const updatedProfile = await User.findByIdAndUpdate(
+            { _id: id },
+            { image: image.secure_url },
+            { new: true }
+        )
+
+        res.status(200).json({
+            success: true,
+            message: `Image updated successfully`,
+            data: updatedProfile
+        })
+
+    }
+    catch (error) {
+        console.log("error:-", error)
+        console.log("error Message:- ", error.message)
+        return res.status(500).json({
+            success: false,
+            message: "unable to update display image , please try again",
+        })
+    }
+}
+
+exports.getEnrolledCourses = async (req, res) => {
+    try {
+        const userId = req.user.id
+        const userDetails = await User.findById(userId)
+            .populate(
+                {
+                    path: "courses",
+                    populate: {
+                        path: "courseContent",
+                        populate: {
+                            path: "subSection"
+                        }
+                    }
+                }
+            )
+            .exec()
+
+        if (!userDetails) {
+            return res.status(404).json({
+                success: false,
+                message: `could Not find user with userid: ${userId}`
+            })
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "successfully found enrolled courses",
+            data: userDetails
+        })
+
+    }
+    catch (error) {
+        console.log("error Message:- ", error.message)
+        return res.status(500).json({
+            success: false,
+            message: "unable to get enrolled Courses , please try again",
+        })
+    }
+}
+
+exports.instructorDashboard = async (req, res) => {
+    try {
+        const id = req.user.id
+        const courseDetails = await Course.find({ instructor: id })
+
+        const courseData = courseDetails.map((course) => {
+            const totalStudentsEnrolled = course?.studentsEnrolled?.length
+            const totalAmountGenerated = totalStudentsEnrolled * course.price
+
+            // Create a new object with the additional fields
+
+            const courseDataWithStats = {
+                _id: course._id,
+                courseName: course.courseName,
+                courseDescription: course.courseDescription,
+                totalStudentsEnrolled,
+                totalAmountGenerated
+            }
+            return courseDataWithStats;
+
+        })
+
+        return res.status(200).json({
+            success: true,
+            message: "successfull get course details for all created courses by a patricular instructor",
+            data: courseData
+        })
+    }
+    catch (error) {
+        console.log("error Message:- ", error.message)
+        return res.status(500).json({
+            success: false,
+            message: "unable to get all Course details created by an instructor ",
         })
     }
 }

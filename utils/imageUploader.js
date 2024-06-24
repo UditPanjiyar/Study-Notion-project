@@ -6,8 +6,7 @@ exports.uploadImageToCloudinary = async (file,folder,height,quality)=>{
     if(quality){
         options.quality = quality
     }
-    if(height)
-    {
+    if(height){
         options.height = height
     }
     return await cloudinary.uploader.upload(file.tempFilePath,options)

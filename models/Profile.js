@@ -13,10 +13,11 @@ const profileSchema = new mongoose.Schema({
         trim: true
     },
     contactNumber: {
-        type: Number
+        type: Number,
+        trim: true
     }
 
 })
 
 
-module.exports= mongoose.model("Profile", profileSchema)
+module.exports = mongoose.model("Profile", profileSchema)
