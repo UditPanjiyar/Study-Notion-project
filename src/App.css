@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+    overflow-x: hidden;
+    overscroll-behavior: auto;
+    background-color: #000814;
+}
+
+
+.custom-shadow {
+    box-shadow: -10px -10px 20px rgba(0, 0, 255, 0.5), 18px 14px 0px white;
+    border: 5px solid white;
+    position: relative;
+    background-color: #000;
+}
+
+.custom-shadow video {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.grad {
+    position: absolute;
+    width: 370px;
+    height: 245px;
+    left: calc(50% - 435.95px/2 - 76.53px);
+    top: calc(50% - 257.05px/2 - 47.47px);
+
+    /* Gradient/02 */
+
+    background: linear-gradient(123.77deg, #8A2BE2 -6.46%, #FFA500 59.04%, #F8F8FF 124.53%);
+    opacity: 0.2;
+    filter: blur(34px);
+    transform: matrix(1, 0, -0.03, 1, 0, 0);
+    border-radius: 50%;
+    /* Inside auto layout */
+}
+
+.glass {
+    background: rgba(255, 255, 255, 0);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.grad2 {
+    position: absolute;
+    width: 372.95px;
+    height: 257.05px;
+    left: calc(50% - 372.95px/2 - 76.53px);
+    top: calc(50% - 257.05px/2 - 47.47px);
+
+    /* Gradient/05 */
+
+    background: linear-gradient(118.19deg, #1FA2FF -3.62%, #12D8FA 50.44%, #A6FFCB 104.51%);
+    opacity: 0.2;
+    filter: blur(34px);
+    transform: matrix(1, 0, -0.03, 1, 0, 0);
+    border-radius: 50%;
+
+    /* Inside auto layout */
+
+
+}
