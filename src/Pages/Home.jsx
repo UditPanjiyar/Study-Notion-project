@@ -2,13 +2,18 @@ import React from 'react'
 import { FaArrowRight } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import "../App.css"
-// import "../Style/HomePage_video_shaddow.css"
+
 
 
 import CTAButtom from "../components/core/HomePage/Button"
 import Banner from "../assets/Images/banner.mp4"
 import CodeBlocks from '../components/core/HomePage/CodeBlocks'
-import HilightText from '../components/core/HilightText'
+import HilightText from '../components/core/HomePage/HilightText'
+import TimelineSection from '../components/core/HomePage/TimelineSection'
+import LearningLanguageSection from '../components/core/HomePage/LearningLanguageSection'
+import InstructorSection from '../components/core/HomePage/InstructorSection'
+import Footer from '../components/common/Footer'
+import ExploreMore from '../components/core/HomePage/ExploreMore'
 
 const Home = () => {
     return (
@@ -125,16 +130,81 @@ const Home = () => {
                      />
                 </div>
 
+                <ExploreMore/>
+                
             </div>
 
 
         {/* //section 2*/}
-       
+            <div className='bg-pure-greys-5 text-richblack-700'>
+
+                    <div className='homepage_bg h-[333px]'>
+
+                        <div className='w-11/12 max-w-maxContent flex flex-col items-center justify-center gap-5 mx-auto'>
+                                <div className='h-[150px]'></div>
+                                <div className='flex flex-row gap-7 text-white '>
+
+                                        <CTAButtom active={true} linkTo={"/signup"}>
+                                            <div className='flex items-center gap-3'>
+                                                Explore Full Catalog
+                                                <FaArrowRight/>
+                                            </div>
+                                        </CTAButtom>
+                                        <CTAButtom active={false} linkTo={"/signup"}>
+                                            <div>
+                                                Learn More
+                                            </div>
+
+                                        </CTAButtom>
+                                        
+                                </div>
+
+                        </div>
+                    </div>
+
+                    <div className='mx-auto w-11/12 max-w-maxContent flex flex-col items-center justify-between gap-7'>
+                            
+                        <div className='flex flex-row gap-5 mb-10 mt-[90px]'>
+                            <div className='text-4xl font-semibold w-[45%]'>
+                                Get the skills you need for
+                                <HilightText text={"job that is in demand."}/>
+                                
+                            </div>
+                            <div className='flex flex-col gap-10 w-[40%] items-start'>
+                                
+                                <div className='text-[16px]'>
+                                    The modern StudyNotion is the dictates its own terms. Today, to be a competitive specialist requires more than professional skills.
+                                </div>
+                                <CTAButtom active={true} linkTo={"/signup"}>
+                                    <div>
+                                        Learn more
+                                    </div>
+                                </CTAButtom>
+
+                            </div>
+
+                        </div>
+
+                        <TimelineSection />
+                        <LearningLanguageSection />
+
+                    </div>
+
+                
+
+            </div>
 
 
+        {/* {section 3} */}
+            <div className='w-11/12 mx-auto max-w-maxContent  flex-col items-center justify-between gap-8 
+                            bg-richblack-900 text-white '>
 
+                <InstructorSection />
+                <h2 className='text-center text-4xl md:text-4xl font-semibold mt-10'>Reviews from other learners</h2>
+                        
 
-
+            </div>
+           <Footer/>
 
         </div>
     )

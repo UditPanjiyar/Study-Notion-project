@@ -9,6 +9,9 @@ body {
     background-color: #000814;
 }
 
+.homepage_bg{
+    background: url("../src/assets/Images/bghome.svg");
+}
 
 .custom-shadow {
     box-shadow: -10px -10px 20px rgba(0, 0, 255, 0.5), 18px 14px 0px white;
