@@ -76,12 +76,12 @@ exports.signUp = async (req, res) => {
     try {
         // fetch data from req ki body 
         const {
+            accountType,
             firstName,
             lastName,
             email,
             password,
             confirmPassword,
-            accountType,
             contactNumber,
             otp,
         } = req.body;
@@ -107,7 +107,7 @@ exports.signUp = async (req, res) => {
         if (existingUser) {
             return res.status(400).json({
                 success: false,
-                message: "user already registered"
+                message: "User already exists. Please sign in to continue."
             })
         }
 
@@ -209,7 +209,7 @@ exports.login = async (req, res) => {
             user.password = undefined;
 
             const options = {
-                expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+                expires: new Date(Date.now() +  60 * 1000),
                 httpOnly: true
             }
             res.cookie("token", token, options).status(200).json({

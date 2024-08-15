@@ -14,10 +14,10 @@ const {auth} = require("../middleware/auth")
 //                                      Authentication routes                                             *
 // ********************************************************************************************************
 
-router.post("/login", login)                      // Route for user login
-router.post("/signup", signUp)                    // Route for user signup
-router.post("/sendotp", sendOTP)                  // Route for sending OTP to the user's email
-router.post("/changepassword", auth, changePassword)     // Route for Changing the password
+router.post("/login", login)                            // Route for user login
+router.post("/signup", signUp)                          // Route for user signup
+router.post("/sendotp", sendOTP)                        // Route for sending OTP to the user's email
+router.post("/changepassword", auth, changePassword)    // Route for Changing the password
 
 // ********************************************************************************************************
 //                                      Reset Password                                                    *

@@ -15,11 +15,14 @@ import InstructorSection from '../components/core/HomePage/InstructorSection'
 import Footer from '../components/common/Footer'
 import ExploreMore from '../components/core/HomePage/ExploreMore'
 
+
 const Home = () => {
     return (
         <div>
 
         {/* { section 1} */}
+           
+
             <div className='relative  mx-auto flex flex-col w-11/12 items-center max-w-maxContent text-white justify-between '>
 
                 <Link to="/signup">

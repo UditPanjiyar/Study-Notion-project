@@ -46,11 +46,10 @@ const InstructorSection = () => {
       </div>
 
 
-
-
-
     </div>
   );
 };
+
+
 
 export default InstructorSection;
