@@ -86,7 +86,7 @@ exports.deleteAccount = async (req, res) => {
         const deletedProfile = await Profile.findByIdAndDelete(profileId)
         // TODO: before deleting the user also delete it from studentEnrolled from Course schema 
 
-        for(const courseId of userDetails.courses) {
+        for (const courseId of userDetails.courses) {
             await Course.findByIdAndUpdate(courseId,
                 {
                     $pull: {
@@ -99,7 +99,7 @@ exports.deleteAccount = async (req, res) => {
         await CourseProgress.deleteMany({ userId: id })
 
         // Now delete User 
-        const deletedUser = await User.findByIdAndDelete( id )
+        const deletedUser = await User.findByIdAndDelete(id)
 
         return res.status(200).json({
             success: true,
@@ -140,33 +140,49 @@ exports.getUserDetail = async (req, res) => {
     }
 }
 
+//updateDisplayPicture
 exports.updateDisplayPicture = async (req, res) => {
     try {
-        const id = req.user.id
-        const displayPicture = req.files.displayPicture
-        const image = await uploadImageToCloudinary(displayPicture, process.env.FOLDER_NAME, 1000, 1000)
-        const updatedProfile = await User.findByIdAndUpdate(
-            { _id: id },
-            { image: image.secure_url },
-            { new: true }
-        )
+
+        const id = req.user.id;
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found",
+            });
+        }
+        const image = req.files.pfp;
+        if (!image) {
+            return res.status(404).json({
+                success: false,
+                message: "Image not found",
+            });
+        }
+        const uploadDetails = await uploadImageToCloudinary(
+            image,
+            process.env.FOLDER_NAME
+        );
+        console.log(uploadDetails);
+
+        const updatedImage = await User.findByIdAndUpdate({ _id: id }, { image: uploadDetails.secure_url }, { new: true });
 
         res.status(200).json({
             success: true,
-            message: `Image updated successfully`,
-            data: updatedProfile
-        })
+            message: "Image updated successfully",
+            data: updatedImage,
+        });
 
-    }
-    catch (error) {
-        console.log("error:-", error)
-        console.log("error Message:- ", error.message)
+    } catch (error) {
         return res.status(500).json({
             success: false,
-            message: "unable to update display image , please try again",
-        })
+            message: error.message,
+        });
+
     }
+
 }
+
 
 exports.getEnrolledCourses = async (req, res) => {
     try {

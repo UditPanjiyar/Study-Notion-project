@@ -5,6 +5,7 @@ const userRoutes = require("./routes/User");
 const profileRoutes = require("./routes/Profile");
 const paymentsRoutes = require("./routes/Payments");
 const courseRoutes = require("./routes/Course");
+const contactUsRoutes = require("./routes/ContactUs"); // Add this line
 
 const database = require("./config/database")
 const cookieParser = require("cookie-parser")
@@ -17,6 +18,7 @@ cloudinary.cloudinaryConnect();
 const fileUpload = require("express-fileupload")
 const dotenv = require("dotenv")
 dotenv.config()
+// require('dotenv').config();
 
 const PORT = process.env.PORT || 4000
 
@@ -26,9 +28,11 @@ database.connect()
 // middleware
 app.use(express.json())
 app.use(cookieParser())
+
 app.use(cors({
     origin: "http://localhost:3000",
-    credentials: true
+    credentials: true,
+    maxAge: 14400,
 }))
 
 app.use(fileUpload({
@@ -42,6 +46,7 @@ app.use("/api/v1/auth", userRoutes);
 app.use("/api/v1/profile", profileRoutes);
 app.use("/api/v1/payment", paymentsRoutes);
 app.use("/api/v1/course", courseRoutes);
+app.use("/api/v1/contact", contactUsRoutes); // Register contact routes
 
 app.get("/", (req, res) => {
     return res.json({

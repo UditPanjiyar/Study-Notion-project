@@ -115,9 +115,9 @@ const Navbar = () => {
         <div className='flex-row gap-5 hidden md:flex items-cente'>
           {
             user && user?.accountType !== "Instructor" && (
-              <Link to='/dashboard/cart' className=' relative px-4 '  >
-                <div className=' 50'>
-                  <TiShoppingCart className=' fill-richblack-25 w-7 h-7' />
+              <Link to='/dashboard/cart' className=' relative px-4  '  >
+                <div className=' 50 '>
+                  <TiShoppingCart className=' fill-richblack-25 w-7 h-7 mt-2 ' />
                 </div>
 
                 {

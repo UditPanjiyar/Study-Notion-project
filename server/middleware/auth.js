@@ -12,7 +12,7 @@ exports.auth = async (req, res, next) => {
         // pending -- other  ways to fetch token -- bearer token
         const token = req.body.token
             || req.cookies.token
-            || req.header("Authorization").replace("Bearer ", "");
+            || req.header("Authorisation").replace("Bearer ", "");
         // if token is missing
         if (!token) {
             return res.status(401).json({
