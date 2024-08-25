@@ -25,7 +25,7 @@ const Settings = () => {
   const handleUpload = (e) => {
     e.preventDefault();
     const file = e.target[0].files[0];
-    console.log("File:- ",file);
+    console.log("File:- ", file);
     updatePfp(token, file);
   };
 
@@ -93,6 +93,7 @@ const Settings = () => {
   return (
     <div>
       <div className=" flex-1 overflow-auto">
+
         <div className="mx-auto w-11/12 max-w-[1000px] py-10">
           <h1 className="mb-14 text-3xl font-medium text-richblack-5">
             Edit Profile
@@ -101,7 +102,7 @@ const Settings = () => {
           {/* update profile picture */}
           <div className="flex items-center justify-between rounded-md border-[1px] border-richblack-700 bg-richblack-800 md:p-8 md:px-12 px-3 py-3 text-richblack-5">
             <div className="flex items-center gap-x-4">
-              
+
               <img
                 className="aspect-square w-[78px] rounded-full object-cover"
                 src={profilePicture}
@@ -147,13 +148,16 @@ const Settings = () => {
 
           {/* update additional info */}
           <form onSubmit={handelAdditionalDetails}>
+
             <div className="my-10 flex flex-col gap-y-6 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
               <h2 className="text-lg font-semibold text-richblack-5">
                 Profile Information
               </h2>
+
               <div className="flex flex-col gap-5 lg:flex-row">
+
                 <div className="flex flex-col gap-2 lg:w-[48%]">
-                  <label htmlFor="firstName" className=" text-richblack-50">
+                  <label htmlFor="firstName" className=" text-richblack-50 ">
                     First Name
                   </label>
                   <input
@@ -162,7 +166,7 @@ const Settings = () => {
                     name="firstName"
                     id="firstName"
                     placeholder="Enter first name"
-                    className="form-style"
+                    className="form-style p-2 rounded-lg"
                     onChange={handleOnChange}
                   />
                 </div>
@@ -176,10 +180,11 @@ const Settings = () => {
                     name="lastName"
                     id="lastName"
                     placeholder="Enter first name"
-                    className="form-style"
+                    className="form-style p-2 rounded-lg"
                     onChange={handleOnChange}
                   />
                 </div>
+
               </div>
               <div className="flex flex-col gap-5 lg:flex-row">
                 <div className="flex flex-col gap-2 lg:w-[48%]">
@@ -191,7 +196,7 @@ const Settings = () => {
                     type="date"
                     name="dateOfBirth"
                     id="dateOfBirth"
-                    className="form-style"
+                    className="form-style p-2 rounded-lg"
                     onChange={handleOnChange}
                   />
                 </div>
@@ -204,7 +209,7 @@ const Settings = () => {
                     type="text"
                     name="gender"
                     id="gender"
-                    className="form-style"
+                    className="form-style p-3 rounded-lg"
                     onChange={handleOnChange}
                   >
                     <option value="Prefer not to say">Prefer not to say</option>
@@ -215,6 +220,7 @@ const Settings = () => {
                   </select>
                 </div>
               </div>
+
               <div className="flex flex-col gap-5 lg:flex-row">
                 <div className="flex flex-col gap-2 lg:w-[48%]">
                   <label htmlFor="contactNumber" className="text-richblack-50">
@@ -226,7 +232,7 @@ const Settings = () => {
                     name="contactNumber"
                     id="contactNumber"
                     placeholder="Enter Contact Number"
-                    className="form-style"
+                    className="form-style p-2 rounded-lg"
                     onChange={handleOnChange}
                   />
                 </div>
@@ -240,11 +246,12 @@ const Settings = () => {
                     name="about"
                     id="about"
                     placeholder="Enter Bio Details"
-                    className="form-style"
+                    className="form-style p-2 rounded-lg"
                     onChange={handleOnChange}
                   />
                 </div>
               </div>
+
             </div>
             <div className="flex justify-end gap-2">
               <button

@@ -41,7 +41,7 @@ const LearningLanguageSection = () => {
 
         <div className="w-fit item-center">
 
-          <CTAButton active={true} linkTo={"/ signup"}>
+          <CTAButton active={true} linkTo={"/signup"}>
 
             <div>
               Learn more

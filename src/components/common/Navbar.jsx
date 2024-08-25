@@ -20,6 +20,7 @@ const Navbar = () => {
   const fetchSublinks = async () => {
     try {
       const result = await apiConnector("GET", categories.CATEGORIES_API);
+      console.log("Result->  ",result);
       if (result?.data?.data?.length > 0) {
         setsublinks(result?.data?.data);
       }
@@ -76,7 +77,7 @@ const Navbar = () => {
                                   sublinks?.map((element, index) => (
 
                                     <Link to={`/catalog/${element?.name}`} key={index} className="rounded-lg bg-transparent py-4 pl-4 hover:bg-richblack-50" >
-                                      <p className=''>  {element?.name}  </p>
+                                      <p >  {element?.name}  </p>
                                     </Link>
 
                                   ))

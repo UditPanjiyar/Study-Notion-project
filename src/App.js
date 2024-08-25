@@ -18,6 +18,10 @@ import EnrolledCourses from "./components/core/Dashboard/EnrolledCourses";
 import ContactUs from "./Pages/ContactUs";
 import { useSelector } from "react-redux";
 import { ACCOUNT_TYPE } from "./utils/constants";
+import AddCourse from "./components/core/Dashboard/AddCourse";
+import MyCourses from "./components/core/Dashboard/MyCourses/MyCourses"
+import EditCourse from "./components/core/Dashboard/EditCourse.jsx/EditCourse"
+import Catalog from "./Pages/Catalog";
 
 function App() {
 
@@ -30,7 +34,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
 
-        {/* <Route path="/catalog/:catalog" element={<Catalog />} /> */}
+        <Route path="/catalog/:catalog" element={<Catalog />} />
 
         <Route
           path="/login"
@@ -94,7 +98,7 @@ function App() {
             </>
           )}
 
-          {/* {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
+          {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
             <>
               <Route path="dashboard/add-course" element={<AddCourse />} />
               <Route path="dashboard/my-courses" element={<MyCourses />} />
@@ -102,12 +106,12 @@ function App() {
                 path="dashboard/edit-course/:courseId"
                 element={<EditCourse />}
               />
-              <Route
+              {/* <Route
                 path="dashboard/instructor"
                 element={<InstructorDashboard />}
-              />
+              /> */}
             </>
-          )} */}
+          )}
 
           {/* {user?.accountType === ACCOUNT_TYPE.ADMIN && (
             <>

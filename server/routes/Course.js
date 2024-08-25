@@ -1,13 +1,13 @@
 const express = require("express")
 const router = express.Router()
 
-//Route for :- createCourse , Section(add, update, delete) , Subsection(add, update, delete), getAllCourses, getCoursesDetails;
-//Route for :- createCategory , getAllCategories , getCategoryPageDetails
+//Route for :- createCourse , Section(add, update, delete) , Subsection(add, update, delete), getAllCourses, getCourseDetails, editCourse;
+//Route for :- createCategory , showAllCategories , getCategoryPageDetails , addCourseToCategory
 //Route for :-  createRating , getAverageRating , getReviews
 //Route for :- updateCourseProgress
 
-const {createCourse, getAllCourses,  getCourseDetails} = require("../controller/Course")
-const {createCategory, getAllCategories, categoryPageDetails} = require("../controller/Category")
+const {createCourse, getAllCourses,  getCourseDetails, editCourse, getInstructorCourses , deleteCourse, getFullCourseDetails} = require("../controller/Course")
+const {createCategory, showAllCategories, categoryPageDetails , addCourseToCategory} = require("../controller/Category")
 const {createSection,updateSection,deleteSection} = require("../controller/Section")
 const {createSubSection, updateSubSection, deleteSubSection} = require("../controller/Subsection")
 const {createRating, getAverageRating, getAllRating} = require("../controller/RatingAndReview")
@@ -28,10 +28,10 @@ router.post("/addSubSection", auth, isInstructor, createSubSection)
 router.get("/getAllCourses", getAllCourses)                                               // Get all Registered Courses
 router.post("/getCourseDetails", getCourseDetails)                                          // Get Details for a Specific Courses
 
-// router.post("/getFullCourseDetails", auth, getFullCourseDetails)
-// router.post("/editCourse", auth, isInstructor, editCourse)                              // Edit Course routes
-// router.get("/getInstructorCourses", auth, isInstructor, getInstructorCourses)           // Get all Courses Under a Specific Instructor
-// router.delete("/deleteCourse", deleteCourse)                                            // Delete a Course
+router.post("/getFullCourseDetails", auth, getFullCourseDetails)
+router.post("/editCourse", auth, isInstructor, editCourse)                              // Edit Course routes
+router.get("/getInstructorCourses", auth, isInstructor, getInstructorCourses)           // Get all Courses Under a Specific Instructor
+router.delete("/deleteCourse",auth, deleteCourse)                                          // Delete a Course
 // router.post("/updateCourseProgress", auth, isStudent, updateCourseProgress);
 
 // ********************************************************************************************************
@@ -40,8 +40,9 @@ router.post("/getCourseDetails", getCourseDetails)                              
 
 
 router.post("/createCategory", auth, isAdmin, createCategory)
-router.get("/getAllCategories", getAllCategories)
+router.get("/showAllCategories", showAllCategories)
 router.post("/getCategoryPageDetails", categoryPageDetails)
+router.post("/addCourseToCategory", auth, isInstructor, addCourseToCategory);
 
 // ********************************************************************************************************
 //                                      Rating and Review (only by Student)                               *
