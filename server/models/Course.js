@@ -50,15 +50,20 @@ const courseSchema = new mongoose.Schema({
             required: true
         }
     ],
-    instructions:{
-        type:[String],
+    instructions: {
+        type: [String],
     },
-    status:{
-        type:String,
-        enum:["Draft","Published"]
+    status: {
+        type: String,
+        enum: ["Draft", "Published"]
+    },
+    createdAt:{
+        type:Date,
+        default:Date.now,
     }
 
-
-})
+},
+    { timestamps: true }
+)
 
 module.exports = mongoose.model("Course", courseSchema)

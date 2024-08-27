@@ -287,7 +287,7 @@ const CourseInformationForm = () => {
             <div className="flex flex-col space-y-2">
 
                 <label className="text-sm text-richblack-5">
-                    Benefits of the course<sup className="text-pink-200">*</sup>
+                    What you will learn in this course<sup className="text-pink-200">*</sup>
                 </label>
 
                 <textarea

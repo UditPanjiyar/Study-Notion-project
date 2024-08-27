@@ -47,7 +47,7 @@ export const getAllCourses = async () => {
 
 export const fetchCourseDetails = async (courseId, dispatch) => {
   // const toastId = toast.loading("Loading...")
-  dispatch(setProgress(50));
+  // dispatch(setProgress(50));
   let result = null;
   try {
     const response = await apiConnector("POST", COURSE_DETAILS_API, {
@@ -58,14 +58,15 @@ export const fetchCourseDetails = async (courseId, dispatch) => {
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
-    result = response.data.data[0];
+    result = response.data.data;
+    // console.log("RESULT-> ", result);
   } catch (error) {
     console.log("COURSE_DETAILS_API API ERROR............", error);
     result = error.response.data;
     // toast.error(error.response.data.message);
   }
   // toast.dismiss(toastId)
-  dispatch(setProgress(100));
+  // dispatch(setProgress(100));
   //   dispatch(setLoading(false));
   return result;
 };

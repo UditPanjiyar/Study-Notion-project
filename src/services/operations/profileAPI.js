@@ -10,7 +10,7 @@ import { logout } from "./authAPI.js";
 //1. getEnrolledCourses
 export async function getUserCourses(token,dispatch){
     // const toastId = toast.loading("Loading...");
-    dispatch(setProgress());
+    dispatch(setProgress(50));
     let result = []
     try {
       console.log("BEFORE Calling BACKEND API FOR ENROLLED COURSES");
@@ -23,10 +23,7 @@ export async function getUserCourses(token,dispatch){
         }
       )
       console.log("AFTER Calling BACKEND API FOR ENROLLED COURSES");
-    //   console.log(
-    //     "GET_USER_ENROLLED_COURSES_API API RESPONSE............",
-    //     response
-    //   )
+      console.log("GET_USER_ENROLLED_COURSES_API API RESPONSE............", response)
   
       if (!response.data.success) {
         throw new Error(response.data.message)

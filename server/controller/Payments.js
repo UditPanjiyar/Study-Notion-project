@@ -315,6 +315,7 @@ exports.verifySignature = async (req, res) => {
                 const thumbnail = course.thumbnail;
                 const userEmail = recipient.email;
                 const userName = recipient.firstName + " " + recipient.lastName;
+                
                 const emailTemplate = courseEnrollmentEmail(
                     courseName,
                     userName,

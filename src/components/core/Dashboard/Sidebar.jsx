@@ -26,7 +26,7 @@ const Sidebar = () => {
         <div className=" text-white bg-richblack-800">
 
             <div className="hidden min-w-[222px] flex-col border-r-[1px] border-r-richblack-700 lg:flex
-                             h-[calc[100vh-3.5rem)] bg-richblack-800 py-10"
+                             h-[calc(100vh-3.5rem)] bg-richblack-800 py-10"
             >
                 <div className="flex flex-col">
                     {sidebarLinks.map((link) => {

@@ -8,6 +8,7 @@ import CourseSlider from "../components/core/Catalog/CourseSlider";
 import { getCatalogaPageData } from "../services/operations/pageAndComponentData";
 import CatalogCard from "../components/core/Catalog/CatalogCard";
 import { useDispatch } from "react-redux";
+import Footer from "../components/common/Footer"
 
 const Catalog = () => {
   const Catalog = useParams();
@@ -44,7 +45,7 @@ const Catalog = () => {
     const fetchCatalogPageData = async () => {
       const result = await getCatalogaPageData(categoryID, dispatch);
       setCatalogPageData(result);
-      console.log("page data", CatalogPageData);
+      // console.log("page data", CatalogPageData);
     };
     if (categoryID) {
       fetchCatalogPageData();
@@ -70,6 +71,7 @@ const Catalog = () => {
       </div>
 
       <div className=" mx-auto box-content w-full max-w-maxContentTab px-2 py-12 lg:max-w-maxContent">
+        
         <h2 className="Courses to get you started text-white text-3xl">
           Courses to get you started
         </h2>
@@ -124,11 +126,13 @@ const Catalog = () => {
             <CatalogCard
               key={index}
               course={item}
-              Height={"h-[100px] lg:h-[400px]"}
+              Height={"h-[100px] lg:h-[300px]"}
             />
           ))}
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 };
