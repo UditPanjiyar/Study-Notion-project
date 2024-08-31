@@ -9,7 +9,7 @@ import StatsComponent from '../components/core/AboutPage/Stats'
 import LearningGrid from '../components/core/AboutPage/LearningGrid'
 import ContactFormSection from '../components/contactUs/ContactUsForm'
 import Footer from '../components/common/Footer'
-// import RatingSlider from '../Components/core/Ratings/RatingSlider';
+import RatingSlider from '../components/core/Ratings/RatingSlider';
 
 const About = () => {
   return (
@@ -93,7 +93,7 @@ const About = () => {
       <section>
       <div className=' mb-16 mt-3 w-screen'>
         <h2 className='text-center text-4xl font-semibold mt-8 text-richblack-5 mb-5'>Reviews from other learners</h2>
-        {/* <RatingSlider /> */}
+        <RatingSlider />
       </div>
       </section>
 

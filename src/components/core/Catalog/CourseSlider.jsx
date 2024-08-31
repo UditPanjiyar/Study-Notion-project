@@ -7,7 +7,9 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation, FreeMode, Mousewheel, Keyboard } from "swiper/modules";
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+
 import "react-loading-skeleton/dist/skeleton.css";
+
 
 import CatalogCard from './CatalogCard';
 

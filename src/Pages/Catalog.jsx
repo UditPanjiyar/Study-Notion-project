@@ -22,9 +22,11 @@ const Catalog = () => {
   const fetchSublinks = async () => {
     try {
       const result = await apiConnector("GET", categories.CATEGORIES_API);
+      // console.log("CALLING getAllCategory ", result);
       const category_id = result.data.data.filter(
         (item) => item.name === Catalog.catalog
       )[0]._id;
+      // console.log("category_id ", category_id);
 
       setcategoryID(category_id);
       setDesc(

@@ -6,13 +6,15 @@ const router = express.Router()
 //Route for :-  createRating , getAverageRating , getReviews
 //Route for :- updateCourseProgress
 
-const {createCourse, getAllCourses,  getCourseDetails, editCourse, getInstructorCourses , deleteCourse, getFullCourseDetails} = require("../controller/Course")
-const {createCategory, showAllCategories, categoryPageDetails , addCourseToCategory} = require("../controller/Category")
-const {createSection,updateSection,deleteSection} = require("../controller/Section")
-const {createSubSection, updateSubSection, deleteSubSection} = require("../controller/Subsection")
-const {createRating, getAverageRating, getAllRating} = require("../controller/RatingAndReview")
-const {auth, isInstructor, isStudent, isAdmin} = require("../middleware/auth")
-// const {} = require("../controller/courseProgress")
+const { createCourse, getAllCourses, getCourseDetails, editCourse,
+    getInstructorCourses, deleteCourse, getFullCourseDetails, markLectureAsComplete } = require("../controller/Course")
+
+const { createCategory, showAllCategories, categoryPageDetails, addCourseToCategory } = require("../controller/Category")
+const { createSection, updateSection, deleteSection } = require("../controller/Section")
+const { createSubSection, updateSubSection, deleteSubSection } = require("../controller/Subsection")
+const { createRating, getAverageRating, getAllRating } = require("../controller/RatingAndReview")
+const { auth, isInstructor, isStudent, isAdmin } = require("../middleware/auth")
+
 
 
 // ********************************************************************************************************
@@ -31,8 +33,8 @@ router.post("/getCourseDetails", getCourseDetails)                              
 router.post("/getFullCourseDetails", auth, getFullCourseDetails)
 router.post("/editCourse", auth, isInstructor, editCourse)                              // Edit Course routes
 router.get("/getInstructorCourses", auth, isInstructor, getInstructorCourses)           // Get all Courses Under a Specific Instructor
-router.delete("/deleteCourse",auth, deleteCourse)                                          // Delete a Course
-// router.post("/updateCourseProgress", auth, isStudent, updateCourseProgress);
+router.delete("/deleteCourse", auth, deleteCourse)                                          // Delete a Course
+router.post("/updateCourseProgress", auth, isStudent, markLectureAsComplete);
 
 // ********************************************************************************************************
 //                                      Category routes (Only by Admin)                                   *

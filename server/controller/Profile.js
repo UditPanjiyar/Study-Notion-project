@@ -199,6 +199,7 @@ exports.getEnrolledCourses = async (req, res) => {
                     }
                 }
             )
+            .populate("courseProgress")
             .exec()
 
         if (!userDetails) {
@@ -223,6 +224,36 @@ exports.getEnrolledCourses = async (req, res) => {
         })
     }
 }
+// exports.getEnrolledCourses=async (req,res) => {
+// 	try {
+//         const id = req.user.id;
+//         const user = await User.findById(id);
+//         if (!user) {
+//             return res.status(404).json({
+//                 success: false,
+//                 message: "User not found",
+//             });
+//         }
+//         const enrolledCourses = await User.findById(id).populate({
+// 			path : "courses",
+// 				populate : {
+// 					path: "courseContent",
+// 			}
+// 		}
+// 		).populate("courseProgress").exec();
+//         // console.log(enrolledCourses);
+//         res.status(200).json({
+//             success: true,
+//             message: "User Data fetched successfully",
+//             data: enrolledCourses,
+//         });
+//     } catch (error) {
+//         return res.status(500).json({
+//             success: false,
+//             message: error.message,
+//         });
+//     }
+// }
 
 exports.instructorDashboard = async (req, res) => {
     try {

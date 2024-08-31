@@ -12,21 +12,22 @@ import About from "./Pages/About";
 import MyProfile from "./components/core/Dashboard/MyProfile";
 import PrivateRoute from "./components/core/Auth/PrivateRoute";
 import Dashboard from "./Pages/Dashboard";
-import Error from "./Pages/Error"
-import Setting from "./components/core/Dashboard/Settings"
+import Error from "./Pages/Error";
+import Setting from "./components/core/Dashboard/Settings";
 import EnrolledCourses from "./components/core/Dashboard/EnrolledCourses";
 import ContactUs from "./Pages/ContactUs";
 import { useSelector } from "react-redux";
 import { ACCOUNT_TYPE } from "./utils/constants";
 import AddCourse from "./components/core/Dashboard/AddCourse";
-import MyCourses from "./components/core/Dashboard/MyCourses/MyCourses"
-import EditCourse from "./components/core/Dashboard/EditCourse.jsx/EditCourse"
+import MyCourses from "./components/core/Dashboard/MyCourses/MyCourses";
+import EditCourse from "./components/core/Dashboard/EditCourse.jsx/EditCourse";
 import Catalog from "./Pages/Catalog";
 import CourseDetails from "./Pages/CourseDetails";
-import Cart from "./components/core/Dashboard/Cart/index"
+import Cart from "./components/core/Dashboard/Cart/index";
+import ViewCourse from "./Pages/ViewCourse"
+import VideoDetails from "./components/core/ViewCourse/VideoDetails"
 
 function App() {
-
   const user = useSelector((state) => state.profile.user);
 
   return (
@@ -37,7 +38,7 @@ function App() {
         <Route path="/" element={<Home />} />
 
         <Route path="/catalog/:catalog" element={<Catalog />} />
-        
+
         <Route path="/courses/:courseId" element={<CourseDetails />} />
 
         <Route
@@ -71,7 +72,7 @@ function App() {
           }
         />
 
-        <Route path="/about" element={ <About />} />
+        <Route path="/about" element={<About />} />
         <Route path="/contact" element={<ContactUs />} />
 
         {/* ******** */}
@@ -82,12 +83,9 @@ function App() {
             </PrivateRoute>
           }
         >
-        
-
           <Route path="dashboard/my-profile" element={<MyProfile />} />
           <Route path="dashboard/settings" element={<Setting />} />
-         
-          
+
           {user?.accountType === ACCOUNT_TYPE.STUDENT && (
             <>
               <Route path="dashboard/cart" element={<Cart />} />
@@ -122,15 +120,29 @@ function App() {
               <Route path="dashboard/admin-panel" element={<AdminPannel />} />
             </>
           )} */}
+        </Route>
+
+        {/* ************ */}
+
+        <Route element={
+          <PrivateRoute>
+            <ViewCourse />
+          </PrivateRoute>
+        } >
+
+          {user?.accountType === ACCOUNT_TYPE.STUDENT && (
+
+            <Route
+              path="/dashboard/enrolled-courses/view-course/:courseId/section/:sectionId/sub-section/:subsectionId"
+              element={<VideoDetails />}
+            />
+
+
+          )}
 
         </Route>
 
-
-
-
-
-      <Route path="*" element={<Error />} />
-
+        <Route path="*" element={<Error />} />
       </Routes>
     </div>
   );

@@ -309,7 +309,7 @@ exports.verifySignature = async (req, res) => {
                 );
                 //send email
                 const recipient = await User.findById(userId);
-                console.log("recipient=>", course);
+               
                 const courseName = course.courseName;
                 const courseDescription = course.courseDescription;
                 const thumbnail = course.thumbnail;

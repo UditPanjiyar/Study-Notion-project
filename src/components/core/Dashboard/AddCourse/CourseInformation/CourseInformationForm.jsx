@@ -7,7 +7,6 @@ import {
     fetchCourseCategories,
 } from "../../../../../services/operations/courseDetailsAPI";
 import { HiOutlineCurrencyRupee } from "react-icons/hi";
-import { BiUpload } from "react-icons/bi";
 import RequirementField from "./RequirementField";
 import {
     setStep,

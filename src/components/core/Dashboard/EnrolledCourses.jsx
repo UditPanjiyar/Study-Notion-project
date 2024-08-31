@@ -66,7 +66,7 @@ const EnrolledCourses = () => {
                             key={index}
                             onClick={() => {
                                 navigate(
-                                    `view-course/${course._id}/section/${course.courseContent[0]._id}/sub-section/${course.courseContent[0].subSection[0]}`
+                                    `view-course/${course._id}/section/${course.courseContent[0]._id}/sub-section/${course.courseContent[0]?.subSection[0]?._id}`
                                 );
                             }}       
                         >
@@ -88,7 +88,7 @@ const EnrolledCourses = () => {
                                 </div>
                             </div>
 
-                            <div className="w-1/4 px-2 py-3">{course?.totalDuration}</div>
+                            <div className="w-1/4 px-2 py-3 ">{course?.totalDuration} </div>
 
                             <div className="flex w-1/5 flex-col gap-2 px- py-3">
                                 {progressData?.map((progress, index) => {
@@ -116,6 +116,7 @@ const EnrolledCourses = () => {
                                     return null;
                                 })}
                             </div>
+                            
                         </div>
                     ))}
                 </div>

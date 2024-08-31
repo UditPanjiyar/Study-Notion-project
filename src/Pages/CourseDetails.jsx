@@ -24,9 +24,11 @@ const CourseDetails = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { courseId } = useParams();
+
     const [courseDetail, setCourseDetail] = useState(null);
     const [avgReviewCount, setAvgReviewCount] = useState(0);
     const [alreadyEnrolled, setAlreadyEnrolled] = useState(false);
+    
     const { cart } = useSelector((state) => state.cart);
 
     const handelPayment = () => {
