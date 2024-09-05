@@ -145,8 +145,8 @@ export async function deleteAccount(token,dispatch,navigate){
 
 //6. get instructor dashboard
 export async function getInstructorDashboard(token,dispatch){
-  // const toastId = toast.loading("Loading...");
-  dispatch(setProgress());
+  const toastId = toast.loading("Loading...");
+  dispatch(setProgress(50));
   let result = []
   try {
     console.log("BEFORE Calling BACKEND API FOR INSTRUCTOR DASHBOARD");
@@ -159,20 +159,21 @@ export async function getInstructorDashboard(token,dispatch){
       }
     )
     console.log("AFTER Calling BACKEND API FOR INSTRUCTOR DASHBOARD");
-    // console.log(
-    //   "GET_INSTRUCTOR_DASHBOARD_API API RESPONSE............",
-    //   response
-    // )
+    console.log(
+      "GET_INSTRUCTOR_DASHBOARD_API API RESPONSE............",
+      response
+    )
 
     if (!response.data.success) {
       throw new Error(response.data.message)
     }
     result = response.data.data;
-  } catch (error) {
+  } 
+  catch (error) {
     console.log("GET_INSTRUCTOR_DASHBOARD_API API ERROR............", error)
     toast.error("Could Not Get Instructor Dashboard")
   }
   dispatch(setProgress(100));
-  // toast.dismiss(toastId)
+  toast.dismiss(toastId)
   return result
 }

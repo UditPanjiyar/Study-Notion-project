@@ -34,7 +34,7 @@ exports.resetPasswordToken = async (req, res) => {
             { email: email },
             {
                 token: token,
-                resetPasswordExpires: Date.now() + 5 * 60 * 1000
+                resetPasswordExpires: Date.now() + 3600000,
             },
             { new: true } // return updated doc. in res.
         );
@@ -92,7 +92,7 @@ exports.resetPassword = async (req, res) => {
         }
 
         //token time check
-        if (userDetails.resetPasswordExpires < Date.now()) {
+        if (userDetails.resetPasswordExpires > Date.now()) {
             return res.json({
                 success: false,
                 message: "Token is expired, please regenerate your token"

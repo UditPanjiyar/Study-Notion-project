@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="beaf602f-23e6-4239-b170-c0f9e3060ad3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controller/Course.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controller/Course.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/core/Dashboard/AddCourse/CourseInformation/CourseInformationForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/core/Dashboard/AddCourse/CourseInformation/CourseInformationForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/core/Dashboard/AddCourse/RenderSteps.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/core/Dashboard/AddCourse/RenderSteps.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/core/Dashboard/EditCourse.jsx/EditCourse.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/core/Dashboard/EditCourse.jsx/EditCourse.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controller/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controller/Profile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/routes/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/Profile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/operations/profileAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/operations/profileAPI.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,13 +28,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

@@ -96,7 +96,9 @@ exports.deleteAccount = async (req, res) => {
                 { new: true })
         }
         // also delete all course progress related with user 
-        await CourseProgress.deleteMany({ userId: id })
+        // await CourseProgress.deleteMany({ userId: id })
+        await CourseProgress.deleteMany({ _id: { $in: userDetails.courseProgress } }) // observe it carefully
+      
 
         // Now delete User 
         const deletedUser = await User.findByIdAndDelete(id)
@@ -184,6 +186,36 @@ exports.updateDisplayPicture = async (req, res) => {
 }
 
 
+// exports.getEnrolledCourses=async (req,res) => {
+// 	try {
+//         const id = req.user.id;
+//         const user = await User.findById(id);
+//         if (!user) {
+//             return res.status(404).json({
+//                 success: false,
+//                 message: "User not found",
+//             });
+//         }
+//         const enrolledCourses = await User.findById(id).populate({
+// 			path : "courses",
+// 				populate : {
+// 					path: "courseContent",
+// 			}
+// 		}
+// 		).populate("courseProgress").exec();
+//         // console.log(enrolledCourses);
+//         res.status(200).json({
+//             success: true,
+//             message: "User Data fetched successfully",
+//             data: enrolledCourses,
+//         });
+//     } catch (error) {
+//         return res.status(500).json({
+//             success: false,
+//             message: error.message,
+//         });
+//     }
+// }
 exports.getEnrolledCourses = async (req, res) => {
     try {
         const userId = req.user.id
@@ -224,36 +256,7 @@ exports.getEnrolledCourses = async (req, res) => {
         })
     }
 }
-// exports.getEnrolledCourses=async (req,res) => {
-// 	try {
-//         const id = req.user.id;
-//         const user = await User.findById(id);
-//         if (!user) {
-//             return res.status(404).json({
-//                 success: false,
-//                 message: "User not found",
-//             });
-//         }
-//         const enrolledCourses = await User.findById(id).populate({
-// 			path : "courses",
-// 				populate : {
-// 					path: "courseContent",
-// 			}
-// 		}
-// 		).populate("courseProgress").exec();
-//         // console.log(enrolledCourses);
-//         res.status(200).json({
-//             success: true,
-//             message: "User Data fetched successfully",
-//             data: enrolledCourses,
-//         });
-//     } catch (error) {
-//         return res.status(500).json({
-//             success: false,
-//             message: error.message,
-//         });
-//     }
-// }
+
 
 exports.instructorDashboard = async (req, res) => {
     try {
