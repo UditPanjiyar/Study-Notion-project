@@ -15,9 +15,9 @@ const cloudinary  = require("./config/cloudinary")
 // cloudinary connection
 cloudinary.cloudinaryConnect();
 
-const fileUpload = require("express-fileupload")
-const dotenv = require("dotenv")
-dotenv.config()
+const fileUpload = require("express-fileupload");
+const dotenv = require("dotenv");
+dotenv.config();
 // require('dotenv').config();
 
 const PORT = process.env.PORT || 4000
