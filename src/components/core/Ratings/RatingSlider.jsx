@@ -49,7 +49,7 @@ const RatingSlider = () => {
                  }
                  allowSlidePrev={true}
                     slidesPerView={1}
-                    loop={true}
+                    loop={false}
                     spaceBetween={20}
                     pagination={false}
                     modules={[Mousewheel,Keyboard, Autoplay]}
